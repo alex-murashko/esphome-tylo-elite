@@ -18,6 +18,7 @@ MODEL_OPTIONS = {
     "pure": cg.RawExpression("esphome::sauna360::SAUNA360Component::Mode::PURE"),
     "combi": cg.RawExpression("esphome::sauna360::SAUNA360Component::Mode::COMBI"),
     "elite": cg.RawExpression("esphome::sauna360::SAUNA360Component::Mode::ELITE"),
+    "combi_elite": cg.RawExpression("esphome::sauna360::SAUNA360Component::Mode::COMBI_ELITE"),    
 }
 
 CONFIG_SCHEMA = (
