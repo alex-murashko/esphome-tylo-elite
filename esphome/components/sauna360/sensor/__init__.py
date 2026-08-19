@@ -29,6 +29,7 @@ CONF_TOTAL_UPTIME = "total_uptime"
 CONF_MAX_BATH_TEMPERATURE = "max_bath_temperature"
 CONF_OVERHEATING_PCB_LIMIT = "overheating_pcb_limit"
 CONF_SETTING_HUMIDITY_STEP = "setting_humidity_step"
+CONF_CURRENT_HUMIDITY = "current_humidity"
 CONF_SETTING_HUMIDITY = "setting_humidity"
 CONF_WATER_TANK_LEVEL = "water_tank_level"
 CONF_SESSION_UPTIME = "session_uptime"
@@ -89,6 +90,13 @@ CONFIG_SCHEMA = cv.All(
                 state_class=STATE_CLASS_MEASUREMENT,
                 icon="mdi:water-percent",
             ),
+            cv.Optional(CONF_CURRENT_HUMIDITY): sensor.sensor_schema(
+                unit_of_measurement="%",
+                accuracy_decimals=0,
+                device_class=DEVICE_CLASS_HUMIDITY,
+                state_class=STATE_CLASS_MEASUREMENT,
+                icon="mdi:water-percent",
+            ),            
             cv.Optional(CONF_SETTING_HUMIDITY): sensor.sensor_schema(
                 unit_of_measurement="%",
                 accuracy_decimals=0,
@@ -141,6 +149,9 @@ async def to_code(config):
     if CONF_SETTING_HUMIDITY_STEP in config:
         sens = await sensor.new_sensor(config[CONF_SETTING_HUMIDITY_STEP])
         cg.add(var.set_setting_humidity_step_sensor(sens))
+    if CONF_CURRENT_HUMIDITY in config:
+        sens = await sensor.new_sensor(config[CONF_CURRENT_HUMIDITY])
+        cg.add(var.set_humidity_percent_sensor(sens))        
     if CONF_SETTING_HUMIDITY in config:
         sens = await sensor.new_sensor(config[CONF_SETTING_HUMIDITY])
         cg.add(var.set_setting_humidity_percent_sensor(sens))
