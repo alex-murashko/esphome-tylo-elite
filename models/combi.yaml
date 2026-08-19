@@ -6,7 +6,10 @@ sensor:
   - platform: sauna360
     water_tank_level:
       name: "Water Tank Level"
-
+  - platform: sauna360
+    current_humidity:
+      name: "Current Humidity"
+      
 number:
   - platform: sauna360
     humidity_step:
