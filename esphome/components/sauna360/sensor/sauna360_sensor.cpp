@@ -17,6 +17,7 @@ void SAUNA360Sensor::dump_config() {
   LOG_SENSOR("  ", "Max Bath Temperature (°C)",   this->max_bath_temperature_sensor_);
   LOG_SENSOR("  ", "Overheating PCB Limit (°C)",  this->overheating_pcb_limit_sensor_);
   LOG_SENSOR("  ", "Setting Humidity Step",       this->setting_humidity_step_sensor_);
+  LOG_SENSOR("  ", "Humidity (%)",                this->humidity_percent_sensor_);  
   LOG_SENSOR("  ", "Setting Humidity (%)",        this->setting_humidity_percent_sensor_);
   LOG_SENSOR("  ", "Water Tank Level (%)",        this->water_tank_level_sensor_);
   LOG_SENSOR("  ", "Session Uptime (min)",        this->session_uptime_sensor_);
