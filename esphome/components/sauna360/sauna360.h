@@ -48,6 +48,7 @@ public:
   virtual void on_light_status(bool) {};
   virtual void on_ready_status(bool) {};
   virtual void on_setting_humidity_step(uint16_t) {};
+  virtual void on_humidity_percent(uint16_t) {};
   virtual void on_setting_humidity_percent(uint16_t) {};
   virtual void on_water_tank_level(uint16_t) {};
   virtual void on_session_uptime(uint32_t) {};
