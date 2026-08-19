@@ -477,17 +477,12 @@ void SAUNA360Component::process_temperature(uint32_t data) {
            setpoint_temp);
 }
 
+
+
 void SAUNA360Component::process_combi_sensors(uint32_t data) {
-  int actual_temp = (data & 0x00007FF) / 9.0;
-  int temp_hex = (data & 0x00007FF);
-
-  // for (auto &listener : listeners_) {
-  //  listener->on_temperature(actual_temp);
-  // }
-
-  int hum = ((data >> 11) & 0x00007FF) / 9.0;
-  ESP_LOGI(TAG, "Temperature = %d°C, Temp = %d, Target Temperature = %d°C", actual_temp, temp_hex, 
-           hum);
+  int temp_hex = (data & 0x000FFFF);
+  int actual_temp = temp_hex-33400;
+  ESP_LOGI(TAG, "Temperature = %d°C, TempH = %d°C", actual_temp, temp_hex);
 }
 
 void SAUNA360Component::process_humidity_control(uint32_t data) {
