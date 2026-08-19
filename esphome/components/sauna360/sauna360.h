@@ -111,6 +111,7 @@ public:
   void process_bath_time(uint32_t data);
   void process_pcb_limit(uint32_t data);
   void process_temperature(uint32_t data);
+  void process_combi_sensors(uint32_t data);
   void process_heater_error(uint32_t data);
   void process_relay_bitmap(uint32_t data);
   void process_total_uptime(uint32_t data);
