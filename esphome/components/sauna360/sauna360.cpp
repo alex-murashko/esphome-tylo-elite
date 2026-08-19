@@ -255,6 +255,7 @@ void SAUNA360Component::handle_packet_(std::vector<uint8_t> packet) {
     this->process_heater_status(data);
     break;
   case 0x3801: /* combi sensors */
+    this->process_combi_sensors(data);
     break;
   case 0x4002:
     this->process_bath_time(data);
@@ -463,6 +464,31 @@ void SAUNA360Component::process_temperature(uint32_t data) {
     if (this->bath_temperature_number_->state != setpoint_temp) {
       this->bath_temperature_number_->publish_state(setpoint_temp);
     }
+  }
+
+  for (auto &listener : listeners_) {
+    if (listener->current_target_temperature != setpoint_temp) {
+      listener->on_temperature_setting(setpoint_temp);
+      listener->current_target_temperature = setpoint_temp;
+    }
+  }
+
+  ESP_LOGI(TAG, "Temperature = %d°C, Target Temperature = %d°C", actual_temp,
+           setpoint_temp);
+}
+
+void SAUNA360Component::process_combi_sensors(uint32_t data) {
+  int actual_temp = (data & 0x00007FF) / 9.0;
+  int temp_hex = (data & 0x00007FF);
+
+  // for (auto &listener : listeners_) {
+  //  listener->on_temperature(actual_temp);
+  // }
+
+  int hum = ((data >> 11) & 0x00007FF) / 9.0;
+  ESP_LOGI(TAG, "Temperature = %d°C, Temp = %d, Target Temperature = %d°C", actual_temp, temp_hex
+           hum);
+
   }
 
   for (auto &listener : listeners_) {
