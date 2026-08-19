@@ -518,9 +518,10 @@ void SAUNA360Component::process_humidity_control(uint32_t data) {
     if (target_pct > 100)
       target_pct = 100;
 
-    for (auto &listener : listeners_)
+    for (auto &listener : listeners_) {
       listener->on_setting_humidity_percent(static_cast<uint16_t>(target_pct));
-
+      listener->on_humidity_percent(static_cast<uint16_t>(current_pct));
+    }
 #ifdef USE_NUMBER
     if (this->humidity_percent_number_ != nullptr) {
       const float fpct = static_cast<float>(target_pct);
