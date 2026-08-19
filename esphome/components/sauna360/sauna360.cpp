@@ -481,11 +481,11 @@ void SAUNA360Component::process_temperature(uint32_t data) {
 
 void SAUNA360Component::process_combi_sensors(uint32_t data) {
   int temp_hex = (data & 0x000FFFF);
-  int actual_temp_i = temp_hex-33400;
-  int humidity_i = ((data >> 16) & 0xFFF) - 800;
+  int actual_temp_i = temp_hex-0x8000;
+  int humidity_i = (data >> 16) - 0x8000;
   float temp = actual_temp_i * 0.01f;
-  float humidity = humidity_i * 0.1f;
-  ESP_LOGI(TAG, "Combi: Temperature = %.2f°C, Humidity =%.1f%%", temp, humidity);
+  float humidity = humidity_i * 0.008f;
+  ESP_LOGI(TAG, "Combi: Temperature = %.2f°C, Humidity =%.2f%%", temp, humidity);
 }
 
 void SAUNA360Component::process_humidity_control(uint32_t data) {
