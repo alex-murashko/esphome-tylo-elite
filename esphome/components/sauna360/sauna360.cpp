@@ -486,7 +486,7 @@ void SAUNA360Component::process_combi_sensors(uint32_t data) {
   // }
 
   int hum = ((data >> 11) & 0x00007FF) / 9.0;
-  ESP_LOGI(TAG, "Temperature = %d°C, Temp = %d, Target Temperature = %d°C", actual_temp, temp_hex
+  ESP_LOGI(TAG, "Temperature = %d°C, Temp = %d, Target Temperature = %d°C", actual_temp, temp_hex, 
            hum);
 
   }
