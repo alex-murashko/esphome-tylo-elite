@@ -101,6 +101,16 @@ public:
     }
   }
 
+  void set_humidity_percent_sensor(sensor::Sensor *s) {
+    this->humidity_percent_sensor_ = s;
+  }
+  void on_humidity_percent(uint16_t v) override {
+    if (this->humidity_percent_sensor_ != nullptr) {
+      if (this->humidity_percent_sensor_->get_state() != v)
+        this->humidity_percent_sensor_->publish_state(v);
+    }
+  }
+
   void set_water_tank_level_sensor(sensor::Sensor *s) {
     this->water_tank_level_sensor_ = s;
   }
@@ -131,6 +141,7 @@ protected:
   sensor::Sensor *max_bath_temperature_sensor_{nullptr};
   sensor::Sensor *overheating_pcb_limit_sensor_{nullptr};
   sensor::Sensor *setting_humidity_step_sensor_{nullptr};
+  sensor::Sensor *humidity_percent_sensor_{nullptr};
   sensor::Sensor *setting_humidity_percent_sensor_{nullptr};
   sensor::Sensor *water_tank_level_sensor_{nullptr};
   sensor::Sensor *session_uptime_sensor_{nullptr};
